@@ -247,8 +247,11 @@ my-rules-ast/
 ## Test Cases
 
 1. Use `create_rule` to generate individual rules from examples and verify their AST representation.	
-	* Creating the rules by taking a rule string 
+	* Creating the rules by taking a rule string and generating individual rules. Segregated the implementation of `create_rules` into `parse_rule` function and `create_rule_endpoint` endpoint
 2. Use `combine_rules` to merge example rules and ensure the resulting AST reflects the combined logic.
+	* Merging selected rule strings, converting them to ast, storing the new rule. Implemented using `combine_asts` function and `combine_rules_endpoint` endpoint
 3. Implement sample JSON data and test `evaluate_rule` for different scenarios.
+	* Evaluated different scenarios which involve true and false
 4. Experiment with combining additional rules and test the functionality.
+	* Also tested combining merged rules
 
