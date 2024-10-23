@@ -11,7 +11,7 @@ export default function App() {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <Navbar />
-        <main className="container mx-auto px-4 py-32">
+        <main className="container mx-auto px-4 py-16">
           <Routes>
             <Route path="/create-rule" element={<RuleInput />} />
             <Route path="/evaluate-rule" element={<RuleEvaluator />} />

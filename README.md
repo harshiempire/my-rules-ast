@@ -44,8 +44,8 @@ Welcome to the Rule Engine Application! This application allows users to create,
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/ruleengineapp.git
-cd ruleengineapp
+git clone https://github.com/harshiempire/my-rules-ast.git
+cd my-rules-ast
 ```
 
 ### 2. Backend Setup (Flask)
@@ -56,17 +56,17 @@ cd ruleengineapp
 cd rule-engine-backend
 ```
 
-#### b. Create a Virtual Environment and Install Dependencies
+#### b. Create a Virtual Environment and Activate the Virtual Environment
 
 ```bash
 python -m venv env
-pip install
+source env/bin/activate
 ```
 
-#### c. Activate the Virtual Environment
+#### c. Install Dependencies
 
 ```bash
-source env/bin/activate
+pip install -r requirements.txt
 ```
 
 #### d. Run the Flask Application
@@ -103,7 +103,7 @@ The frontend application will start on http://localhost:3000.
 
 
 ```markdown
-ruleengineapp/
+my-rules-ast/
 ├── rule-engine-backend/
 │   ├── app.py
 │   ├── evaluator.py
@@ -112,7 +112,13 @@ ruleengineapp/
 │   ├── node.py
 │   ├── parser.py
 │   ├── requirements.txt
-│   └── ... (other backend files)
+│   ├── utils.py
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── rule_routes.py
+│   │   └── evaluation_routes.py
+│   └── instance/
+│       └── rules.db
 ├── rule-engine-ui/
 │   ├── public/
 │   ├── src/
@@ -128,6 +134,35 @@ ruleengineapp/
 │   └── ... (other frontend files)
 └── README.md
 ```
+### Backend (rule-engine-backend/)
+
+*	**app.py**: Entry point of the Flask application. Initializes the app, configures settings, registers blueprints, and starts the server.
+*	**extensions.py**: Initializes and configures Flask extensions such as SQLAlchemy for database interactions.
+*	**models.py**: Defines the database models using SQLAlchemy. In this project, it includes the Rule model representing the rules stored in the database.
+*	**parser.py**: Contains the rule parser built with pyparsing. Transforms rule strings into Abstract Syntax Trees (ASTs).
+*	**evaluator.py**: Evaluates the ASTs against input data to determine if the data satisfies the defined rules.
+*	**node.py**: Defines the Node class used to represent elements of the AST, including operators and operands.
+*	**utils.py**: Provides utility functions for AST manipulation, such as converting between ASTs and dictionaries, simplifying ASTs, and combining multiple ASTs.
+*	**routes/**
+
+	+	**__init__.py**: Imports and aggregates all blueprint modules (rule_routes and evaluation_routes) for easy registration in the main application.
+	+	**rule_routes.py**: Defines routes related to rule management, including creating, retrieving, combining, and validating rules.
+	+	**evaluation_routes.py**: Defines routes for evaluating rules against provided data inputs.
+*	**requirements.txt**: Lists all Python dependencies required to run the backend application. Use this file to install dependencies via pip.
+*	**instance/rules.db**: SQLite database file that stores all the rules. Automatically created when the application runs if it doesn’t exist.
+
+### Frontend (rule-engine-ui/)
+
+*	**src/components/**
+	+	**RuleCreator.js**: React component that provides a user interface for creating new rules.
+	+	**RuleEvaluator.js**: React component that allows users to evaluate existing rules against input data.
+	+	**RuleList.js**: React component that displays a list of all created rules, allowing users to view or select specific rules.
+	+	**RuleTree.js**: React component that visualizes the Abstract Syntax Tree (AST) of a selected rule for better understanding and debugging.
+*	**src/App.js**: Main React component that integrates all other components and manages the overall layout and routing of the frontend application.
+*	**src/index.js**: Entry point of the React application. Renders the App component into the DOM and sets up the React environment.
+*	**public/**: Contains static assets like index.html, images, and other resources that are publicly accessible.
+*	**package.json**: Lists all JavaScript dependencies, scripts, and project metadata. Use this file to install dependencies via npm.
+
 
 ## Usage
 
@@ -210,3 +245,10 @@ ruleengineapp/
 * DATABASE_URI: URI for the database (default is sqlite:///rules.db)
 
 ## Test Cases
+
+1. Use `create_rule` to generate individual rules from examples and verify their AST representation.	
+	* Creating the rules by taking a rule string 
+2. Use `combine_rules` to merge example rules and ensure the resulting AST reflects the combined logic.
+3. Implement sample JSON data and test `evaluate_rule` for different scenarios.
+4. Experiment with combining additional rules and test the functionality.
+

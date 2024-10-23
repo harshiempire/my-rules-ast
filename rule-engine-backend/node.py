@@ -1,4 +1,4 @@
-# node.py
+# rule-engine-backend/node.py
 
 class Node:
     def __init__(self, type, value=None, left=None, right=None, attribute=None, operator=None, constant=None):

@@ -1,8 +1,7 @@
-# evaluator.py
+# rule-engine-backend/evaluator.py
 
 import operator
-import re
-from node import Node  # Import Node class
+from node import Node
 
 operators = {
     '>': operator.gt,
@@ -27,7 +26,7 @@ def evaluate_ast(ast, data):
             raise ValueError(f'Unknown operator {ast.value}')
     else:
         raise ValueError(f'Unknown node type {ast.type}')
-    
+
 def evaluate_condition(node, data):
     attribute = node.attribute
     operator_str = node.operator
