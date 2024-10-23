@@ -1,5 +1,3 @@
-# rule-engine-backend/routes/rule_routes.py
-
 from flask import Blueprint, request, jsonify
 from models import Rule
 from parser import parse_rule
@@ -12,6 +10,7 @@ rule_bp = Blueprint('rule_bp', __name__)
 
 @rule_bp.route('/create_rule', methods=['POST'])
 def create_rule_endpoint():
+    """Create a new rule based on a given rule string."""
     data = request.get_json()
     rule_string = data.get('rule_string')
     try:
@@ -27,6 +26,7 @@ def create_rule_endpoint():
 
 @rule_bp.route('/rules', methods=['GET'])
 def get_rules():
+    """Fetch all rules."""
     try:
         rules = Rule.query.all()
         rules_list = [
@@ -45,6 +45,7 @@ def get_rules():
 
 @rule_bp.route('/rules/<int:rule_id>', methods=['GET'])
 def get_rule(rule_id):
+    """Fetch a single rule based on its ID."""
     try:
         rule = Rule.query.get(rule_id)
         if not rule:
@@ -61,6 +62,7 @@ def get_rule(rule_id):
 
 @rule_bp.route('/combine_rules', methods=['POST'])
 def combine_rules_endpoint():
+    """Combine multiple rules into a single rule."""
     data = request.get_json()
     rule_ids = data.get('rule_ids')
 
@@ -94,6 +96,7 @@ def combine_rules_endpoint():
 
 @rule_bp.route('/validate_rule', methods=['POST'])
 def validate_rule():
+    """Check if a given rule string is valid."""
     data = request.get_json()
     rule_string = data.get('rule_string')
     try:

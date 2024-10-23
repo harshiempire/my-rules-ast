@@ -1,9 +1,9 @@
-# rule-engine-backend/utils.py
-
 from node import Node
 from collections import Counter
+from typing import List, Optional
 
-def ast_to_dict(ast):
+def ast_to_dict(ast: Node) -> Optional[dict]:
+    """Convert an Abstract Syntax Tree (AST) node to a JSON-like dictionary"""
     if ast is None:
         return None
     return {
@@ -16,7 +16,8 @@ def ast_to_dict(ast):
         'right': ast_to_dict(ast.right)
     }
 
-def dict_to_ast(ast_dict):
+def dict_to_ast(ast_dict: dict) -> Node:
+    """Convert a JSON-like dictionary to an Abstract Syntax Tree (AST) node"""
     if ast_dict is None:
         return None
     node = Node(
@@ -30,7 +31,8 @@ def dict_to_ast(ast_dict):
     node.right = dict_to_ast(ast_dict.get('right'))
     return node
 
-def simplify_ast(node):
+def simplify_ast(node: Node) -> Node:
+    """Apply simplification rules to an Abstract Syntax Tree (AST) node"""
     if node is None:
         return None
 
@@ -64,7 +66,8 @@ def simplify_ast(node):
 
     return node
 
-def ast_to_rule_string(node):
+def ast_to_rule_string(node: Node) -> str:
+    """Convert an Abstract Syntax Tree (AST) node to a string"""
     if node is None:
         return ''
     if node.type == 'operand':
@@ -79,7 +82,8 @@ def ast_to_rule_string(node):
     else:
         return ''
 
-def combine_asts(asts):
+def combine_asts(asts: List[Node]) -> Node:
+    """Combine multiple Abstract Syntax Trees (ASTs) into a single AST"""
     if not asts:
         return None
 

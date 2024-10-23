@@ -1,5 +1,3 @@
-# rule-engine-backend/evaluator.py
-
 import operator
 from node import Node
 
@@ -13,6 +11,7 @@ operators = {
 }
 
 def evaluate_ast(ast, data):
+    """Evaluates an Abstract Syntax Tree of a rule against input data."""
     if ast.type == 'operand':
         return evaluate_condition(ast, data)
     elif ast.type == 'operator':
@@ -28,6 +27,7 @@ def evaluate_ast(ast, data):
         raise ValueError(f'Unknown node type {ast.type}')
 
 def evaluate_condition(node, data):
+    """Evaluates a condition of a rule against input data."""
     attribute = node.attribute
     operator_str = node.operator
     constant = node.constant

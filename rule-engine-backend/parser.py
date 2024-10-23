@@ -1,5 +1,3 @@
-# rule-engine-backend/parser.py
-
 from pyparsing import (
     infixNotation, opAssoc, Word, alphas, alphanums, nums, Keyword, ParserElement, quotedString, removeQuotes
 )
@@ -7,7 +5,6 @@ from node import Node
 
 ParserElement.enablePackrat()
 
-# Define basic elements
 AND = Keyword("AND", caseless=True)
 OR = Keyword("OR", caseless=True)
 comparison_op = Word("<>=!", max=2)
@@ -16,8 +13,8 @@ integer = Word(nums)
 string_literal = quotedString.setParseAction(removeQuotes)
 value = integer | string_literal
 
-# Define expression for a condition
 def condition_parse_action(tokens):
+    """Convert a parsed condition into a Node object"""
     node = Node(
         type='operand',
         attribute=tokens.attribute,
@@ -43,5 +40,6 @@ bool_expr = infixNotation(
 )
 
 def parse_rule(rule_string):
+    """Parse a rule-string into an Abstract Syntax Tree"""
     result = bool_expr.parseString(rule_string, parseAll=True)
     return result[0]

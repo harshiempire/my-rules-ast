@@ -1,5 +1,3 @@
-# rule-engine-backend/routes/evaluation_routes.py
-
 from flask import Blueprint, request, jsonify
 from models import Rule
 from evaluator import evaluate_ast
@@ -11,6 +9,7 @@ evaluation_bp = Blueprint('evaluation_bp', __name__)
 
 @evaluation_bp.route('/evaluate_rule', methods=['POST'])
 def evaluate_rule():
+    """Evaluates a rule against given input data and returns the result"""
     data = request.get_json()
     rule_id = data.get('rule_id')
     input_data = data.get('data')

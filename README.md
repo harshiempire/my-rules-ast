@@ -6,14 +6,44 @@ Welcome to the Rule Engine Application! This application allows users to create,
 
 ## Table of Contents
 
-
-* [Features](#features)
-* [Demo](#demo)
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-* [Project Structure](#projectstructure)
-* [Usage](#usage)
-* [Examples](#examples)
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Demo](#demo)
+4. [Prerequisites](#prerequisites)
+5. [Installation](#installation)
+   1. [1. Clone the Repository](#1-clone-the-repository)
+   2. [2. Backend Setup (Flask)](#2-backend-setup-flask)
+      - [a. Navigate to the Backend Directory](#a-navigate-to-the-backend-directory)
+      - [b. Create a Virtual Environment and Activate the Virtual Environment](#b-create-a-virtual-environment-and-activate-the-virtual-environment)
+      - [c. Install Dependencies](#c-install-dependencies)
+      - [d. Setting up `.env`](#d-setting-up-env)
+      - [e. Run the Flask Application](#e-run-the-flask-application)
+   3. [3. Frontend Setup (React.js)](#3-frontend-setup-reactjs)
+      - [a. Navigate to the Frontend Directory](#a-navigate-to-the-frontend-directory)
+      - [b. Install Dependencies](#b-install-dependencies-1)
+      - [c. Start the React Application](#c-start-the-react-application)
+6. [Project Structure](#project-structure)
+   - [Backend (`rule-engine-backend/`)](#backend-rule-engine-backend)
+   - [Frontend (`rule-engine-ui/`)](#frontend-rule-engine-ui)
+7. [Functionality](#functionality)
+   1. [1. Create a Rule](#1-create-a-rule)
+   2. [2. View Rules](#2-view-rules)
+   3. [3. Combine Rules](#3-combine-rules)
+   4. [4. Evaluate a Rule](#4-evaluate-a-rule)
+8. [Examples](#examples)
+   - [Example Rule Creation](#example-rule-creation)
+   - [Example Rule Evaluation](#example-rule-evaluation)
+   - [Combining Rules](#combining-rules)
+9. [Dependencies](#dependencies)
+   - [Backend Dependencies](#backend-dependencies)
+   - [Frontend Dependencies](#frontend-dependencies)
+10. [Environment Variables](#environment-variables)
+11. [Non-Functional Enhancements](#non-functional-enhancements)
+    - [Security](#security)
+    - [Performance](#performance)
+    - [Scalability](#scalability)
+    - [Maintainability](#maintainability)
+12. [Test Cases](#test-cases)
 
 
 ## Features
@@ -25,12 +55,21 @@ Welcome to the Rule Engine Application! This application allows users to create,
 * Rule Visualization: Visualize rules as Abstract Syntax Trees (ASTs) for better understanding.
 * Optimized Rule Engine: Minimizes redundant checks by merging common conditions.
 * UserFriendly Interface: Intuitive frontend built with React.js.
-* RESTful API: Backend API built with Flask for rule management and evaluation.
+* RESTful API: Backend API built with Flask for rule management, evaluation, local database for ease of use.
 
 ## Demo
 
+### Rule List
+![Rule List](./screenshots/Rule%20List.png)
 
-(Screenshot showcasing the main features of the application)
+### Create Rule Page
+![Create Rule](./screenshots/Create%20Rule.png)
+
+### Rule Evaluator Page
+![Rule Evaluator](./screenshots/Rule%20Evaluate.png)
+
+### Rule Conmbiner Page
+![Rule Combiner](./screenshots/Rule%20Combiner.png)
 
 ## Prerequisites
 
@@ -69,7 +108,16 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-#### d. Run the Flask Application
+#### d. Setting up .env
+
+```env
+DB_URI=sqlite:///rules.db
+SQLALCHEMY_TRACK_MODIFICATIONS=False
+```
+- Local Database for easy of setup, Cloud Database can also be used
+	* postgresql://advpaytm_owner:************@ep-red-sea-a5iikmd9.us-east-2.aws.neon.tech/advpaytm?sslmode=require
+
+#### e. Run the Flask Application
 
 ```bash
 python app.py
@@ -164,7 +212,7 @@ my-rules-ast/
 *	**package.json**: Lists all JavaScript dependencies, scripts, and project metadata. Use this file to install dependencies via npm.
 
 
-## Usage
+## Functionality
 
 
 ### 1. Create a Rule
@@ -244,14 +292,50 @@ my-rules-ast/
 * PORT: Port number for the backend server (default is 5001)
 * DATABASE_URI: URI for the database (default is sqlite:///rules.db)
 
+## Non-Functional Enhancements
+
+
+### Security
+
+* **Input Validation**: Thorough input validation has been implemented on both the frontend and backend to prevent injection attacks and ensure data integrity. This includes validating rule strings, user inputs, and API request data.
+* **CORS Configuration**: Configured Cross-Origin Resource Sharing (CORS) policies using Flask-CORS to control and secure API access from the frontend application.
+* **Error Handling**: Standardized error responses with appropriate HTTP status codes and messages to prevent leakage of sensitive information. This helps in gracefully handling exceptions and providing meaningful feedback to the user.
+
+### Performance
+
+* **AST Simplification Optimization**: Improved the Abstract Syntax Tree (AST) simplification algorithm to reduce redundant nodes and enhance evaluation speed. This optimization minimizes the computational overhead during rule evaluation.
+* **Lazy Loading**: Implemented lazy loading of components in the frontend to reduce initial load time and improve user experience.
+
+### Scalability
+
+* **Modular Architecture**: Designed the application with a modular architecture, separating concerns between parsing, evaluation, and rule management. This facilitates scaling individual components independently.
+* **Stateless Backend**: Ensured that the backend remains stateless where possible, allowing for horizontal scaling by adding more server instances behind a load balancer.
+* **Database Optimization**: Optimized database interactions using SQLAlchemy ORM features, reducing query times and improving scalability.
+
+### Maintainability
+
+* **Code Documentation**: Added comprehensive docstrings and comments throughout the codebase to aid future developers in understanding the code logic and structure.
+* **Code Formatting and Linting**: Used code linters and formatters such as flake8 and black for Python, and ESLint and Prettier for JavaScript, to maintain a consistent code style and catch potential issues early.
+* **Type Annotations**: Utilized type annotations in Python code to improve code readability and facilitate static analysis tools.
+* **Separation of Concerns**: Adhered to the principles of separation of concerns and single responsibility in code design, making the codebase easier to navigate and maintain.
+
+
 ## Test Cases
 
-1. Use `create_rule` to generate individual rules from examples and verify their AST representation.	
-	* Creating the rules by taking a rule string and generating individual rules. Segregated the implementation of `create_rules` into `parse_rule` function and `create_rule_endpoint` endpoint
+```bash
+1. Use `create_rule` to generate individual rules from examples and verify their AST representation.
+```
+* Creating the rules by taking a rule string and generating individual rules. Segregated the implementation of `create_rules` into `parse_rule` function and `create_rule_endpoint` endpoint
+```
 2. Use `combine_rules` to merge example rules and ensure the resulting AST reflects the combined logic.
-	* Merging selected rule strings, converting them to ast, storing the new rule. Implemented using `combine_asts` function and `combine_rules_endpoint` endpoint
+```
+* Merging selected rule strings, converting them to ast, storing the new rule. Implemented using `combine_asts` function and `combine_rules_endpoint` endpoint
+```
 3. Implement sample JSON data and test `evaluate_rule` for different scenarios.
-	* Evaluated different scenarios which involve true and false
+```
+* Evaluated different scenarios which involve true and false
+```
 4. Experiment with combining additional rules and test the functionality.
-	* Also tested combining merged rules
+```
+* Also tested combining merged rules
 

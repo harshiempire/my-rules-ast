@@ -1,6 +1,7 @@
-# rule-engine-backend/node.py
-
 class Node:
+    """
+    Represents a node in the abstract syntax tree (AST).
+    """
     def __init__(self, type, value=None, left=None, right=None, attribute=None, operator=None, constant=None):
         self.type = type  # 'operator' or 'operand'
         self.value = value  # For 'operator' nodes: 'AND' or 'OR'
