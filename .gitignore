@@ -11,13 +11,12 @@ rule-engine-ui/yarn-error.log*
 
 #backend
 
-
+rule-engine-backend/env/
 rule-engine-backend/venv/
 rule-engine-backend/__pycache__/
 rule-engine-backend/*.py[cod]
 rule-engine-backend/*.sqlite3
 rule-engine-backend/*.db
-rule-engine-backend/.env
 rule-engine-backend/.DS_Store
 rule-engine-backend/Thumbs.db
 
