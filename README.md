@@ -139,7 +139,10 @@ The backend server will start on http://localhost:5001.
 Note: Based in the directory you are in the new terminal, navigate to parent directory which is `my-rules-ast` and follow the steps below
 
 ```bash
-cd rule-engine-ui
+cd rule-engine-ui # if in the my-rules-ast directory
+```
+```bash
+cd ../rule-engine-ui # if in the rule-engine-backend directory
 ```
 
 #### b. Install Dependencies
