@@ -101,7 +101,9 @@ cd rule-engine-backend
 # For macOS and Linux
 python -m venv env
 source env/bin/activate
+```
 
+```bash
 # For Windows
 python -m venv env
 .\env\Scripts\activate
