@@ -97,14 +97,14 @@ cd rule-engine-backend
 
 #### b. Create a Virtual Environment and Activate the Virtual Environment
 
+For macOS and Linux
 ```bash
-# For macOS and Linux
 python -m venv env
 source env/bin/activate
 ```
 
+For Windows
 ```bash
-# For Windows
 python -m venv env
 .\env\Scripts\activate
 ```
