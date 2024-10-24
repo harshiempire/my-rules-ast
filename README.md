@@ -98,8 +98,13 @@ cd rule-engine-backend
 #### b. Create a Virtual Environment and Activate the Virtual Environment
 
 ```bash
+# For macOS and Linux
 python -m venv env
 source env/bin/activate
+
+# For Windows
+python -m venv env
+.\env\Scripts\activate
 ```
 
 #### c. Install Dependencies
