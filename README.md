@@ -115,6 +115,8 @@ pip install -r requirements.txt
 
 #### d. Setting up .env
 
+Create the .env in this directory and paste the below text into it
+
 ```env
 DB_URI=sqlite:///rules.db
 SQLALCHEMY_TRACK_MODIFICATIONS=False
@@ -132,10 +134,12 @@ The backend server will start on http://localhost:5001.
 
 ### 3. Frontend Setup (React.js)
 
-#### a. Navigate to the Frontend Directory
+#### a. Navigate to the Frontend Directory(In a new terminal)
+
+Note: Based in the directory you are in the new terminal, navigate to parent directory which is `my-rules-ast` and follow the steps below
 
 ```bash
-cd ../rule-engine-ui
+cd rule-engine-ui
 ```
 
 #### b. Install Dependencies
@@ -294,8 +298,8 @@ my-rules-ast/
 
 ### Environment Variables
 
-* PORT: Port number for the backend server (default is 5001)
 * DATABASE_URI: URI for the database (default is sqlite:///rules.db)
+* SQLALCHEMY_TRACK_MODIFICATIONS=False: Disables Flask-SQLAlchemy's event system which is not used in this application. This reduces memory usage and improves performance.
 
 ## Non-Functional Enhancements
 
@@ -342,5 +346,6 @@ my-rules-ast/
 ```
 4. Experiment with combining additional rules and test the functionality.
 ```
-* Also tested combining merged rules
+* Also tested combining merged rules where tested merging with the `Idempotent Law` and `Absorption Law`
+---
 
