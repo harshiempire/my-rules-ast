@@ -3,3 +3,4 @@ Flask-Cors
 Flask-SQLAlchemy
 pyparsing
 psycopg2
+dotenv
