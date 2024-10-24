@@ -11,7 +11,7 @@ rule-engine-ui/yarn-error.log*
 
 #backend
 
-rule-engine-backend/env/
+
 rule-engine-backend/venv/
 rule-engine-backend/__pycache__/
 rule-engine-backend/*.py[cod]

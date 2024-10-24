@@ -113,7 +113,7 @@ python -m venv env
 pip install -r requirements.txt
 ```
 
-#### d. Setting up .env
+#### d. Setting up .env (This step can be SKIPPED as the .env file is added for convenience)
 
 Create the .env in this directory and paste the below text into it
 
